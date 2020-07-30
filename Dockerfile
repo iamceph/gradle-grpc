@@ -4,7 +4,11 @@ ENV LANG=C.UTF-8
 
 # Here we install GNU libc (aka glibc) and set C.UTF-8 locale as default.
 
-RUN apk --no-cache add gradle
+RUN echo "Installing Gradle.." \
+        && apk --no-cache add gradle
+
+RUN echo "Testing Gradle installation" \
+        && gradle --version
 
 RUN ALPINE_GLIBC_BASE_URL="https://github.com/sgerrand/alpine-pkg-glibc/releases/download" && \
     ALPINE_GLIBC_PACKAGE_VERSION="2.31-r0" && \
@@ -43,7 +47,3 @@ RUN ALPINE_GLIBC_BASE_URL="https://github.com/sgerrand/alpine-pkg-glibc/releases
         "$ALPINE_GLIBC_BASE_PACKAGE_FILENAME" \
         "$ALPINE_GLIBC_BIN_PACKAGE_FILENAME" \
         "$ALPINE_GLIBC_I18N_PACKAGE_FILENAME"
-
-
-RUN echo "Testing Gradle installation" \
-        && gradle --version
