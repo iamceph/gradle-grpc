@@ -1,17 +1,15 @@
-FROM adoptopenjdk/openjdk11:alpine
+FROM gradle:jdk11
 
 ENV LANG=C.UTF-8
-
-# Here we install GNU libc (aka glibc) and set C.UTF-8 locale as default.
-
-RUN echo "Installing Gradle.." \
-        && apk --no-cache add gradle
 
 RUN echo "Testing Gradle installation" \
         && gradle --version
 
+
+# Here we install GNU libc (aka glibc)
+
 RUN ALPINE_GLIBC_BASE_URL="https://github.com/sgerrand/alpine-pkg-glibc/releases/download" && \
-    ALPINE_GLIBC_PACKAGE_VERSION="2.31-r0" && \
+    ALPINE_GLIBC_PACKAGE_VERSION="2.32-r0" && \
     ALPINE_GLIBC_BASE_PACKAGE_FILENAME="glibc-$ALPINE_GLIBC_PACKAGE_VERSION.apk" && \
     ALPINE_GLIBC_BIN_PACKAGE_FILENAME="glibc-bin-$ALPINE_GLIBC_PACKAGE_VERSION.apk" && \
     ALPINE_GLIBC_I18N_PACKAGE_FILENAME="glibc-i18n-$ALPINE_GLIBC_PACKAGE_VERSION.apk" && \
